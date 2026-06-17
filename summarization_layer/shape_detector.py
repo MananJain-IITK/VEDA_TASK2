@@ -32,7 +32,7 @@ def detect_shape(rows: list[dict], hints: dict) -> str:
         if _is_number(_only_value(rows[0])):
             return 'COUNT'
             
-    if _has_one_dimension_and_one_measure(rows):
+    if len(rows)>1 and _has_one_dimension_and_one_measure(rows): #Changed the logic here according to my understanding
         return 'GROUPED_AGGREGATE'
         
     # Priority 3: Safe fallback, never guess
