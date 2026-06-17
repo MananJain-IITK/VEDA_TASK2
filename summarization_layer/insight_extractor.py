@@ -25,7 +25,7 @@ def extract(rows: list[dict], shape: str, hints: dict) -> dict:
         
     if shape == 'COUNT':
         val = list(rows[0].values())[0] if rows else 0
-        return {"total": val, "entity": hints.get("entity", "records")} 
+        return {"total": val, "entity": hints.get("entity")} 
         
     if shape == 'SINGLE_RECORD':
         return {"fields": [(k, v) for k, v in rows[0].items()]} 
@@ -71,7 +71,8 @@ def extract(rows: list[dict], shape: str, hints: dict) -> dict:
             "pct_change": abs(pct_change),
             "direction": "rose" if end_val >= start_val else "fell",
             "peak": {"label": peak[dim], "value": peak[meas]},
-            "low": {"label": low[dim], "value": low[meas]}
+            "low": {"label": low[dim], "value": low[meas]},
+            "measure_name": meas
         } 
 
     if shape == 'COMPARISON':
@@ -83,7 +84,8 @@ def extract(rows: list[dict], shape: str, hints: dict) -> dict:
             "a": {"label": a[dim], "value": a_val},
             "b": {"label": b[dim], "value": b_val},
             "pct_change": abs(pct_change),
-            "direction": "up" if b_val >= a_val else "down"
+            "direction": "up" if b_val >= a_val else "down",
+            "measure_name": meas
         } 
         
     if shape == 'TOP_N':
@@ -96,7 +98,8 @@ def extract(rows: list[dict], shape: str, hints: dict) -> dict:
         
         return {
             "items": items,
-            "leader": leader
+            "leader": leader,
+            "measure_name": meas
         } 
 
     return {}
