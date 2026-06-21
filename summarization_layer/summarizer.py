@@ -1,8 +1,10 @@
 from dataclasses import dataclass
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Callable
 from shape_detector import detect_shape
 from insight_extractor import extract
 from deterministic_summary import render
+from narrative_layer import polish
+from faithfulness_validator import validate
 
 @dataclass
 class SummaryResult:
@@ -14,14 +16,23 @@ class SummaryResult:
     validated: bool               # did narrative pass faithfulness check
     fallback_used: bool           # True if narrative is None or failed validation
 
-def summarize(query: str, rows: List[dict], hints: dict) -> SummaryResult:
+
+def summarize(query: str, rows: List[dict], hints: dict, mock_llm: Optional[Callable] = None) -> SummaryResult:
     shape = detect_shape(rows, hints)
     facts = extract(rows, shape, hints)
     det_summary = render(shape, facts)
-    narrative = None
+    narrative = polish(det_summary, facts, mock_llm)
     validated = False
-    fallback = True 
+    fallback = True
     
+    if narrative:
+        validated = validate(narrative, facts, rows)
+        if validated:
+            fallback = False
+        else:
+            narrative = None
+            fallback = True 
+            
     return SummaryResult(
         shape=shape,
         insights=[], 

@@ -9,9 +9,11 @@ def _has_one_dimension_and_one_measure(rows: list[dict]) -> bool:
         return False
     
     vals = list(rows[0].values())
+    if len(vals) < 2:
+        return False 
+        
     return (_is_number(vals[0]) and not _is_number(vals[1])) or \
            (not _is_number(vals[0]) and _is_number(vals[1]))
-
 
 def detect_shape(rows: list[dict], hints: dict) -> str:
     # Priority 1: Trust planner hints
