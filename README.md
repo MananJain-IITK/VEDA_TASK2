@@ -1,1 +1,0 @@
-# VEDA_TASK2
