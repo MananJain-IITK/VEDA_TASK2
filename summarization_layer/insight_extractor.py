@@ -30,7 +30,10 @@ def extract(rows: list[dict], shape: str, hints: dict) -> dict:
         return {"total": val, "entity": hints.get("entity", "records")}
         
     if shape == 'SINGLE_RECORD':
-        return {"fields": [(k, v) for k, v in rows[0].items()]}
+        return {
+            "record_count": 1, 
+            "fields": [(k, v) for k, v in rows[0].items()]
+        }
         
     if shape == 'UNKNOWN':
         return {"n_rows": len(rows), "columns": list(rows[0].keys()) if rows else []}
@@ -108,6 +111,7 @@ def extract(rows: list[dict], shape: str, hints: dict) -> dict:
         leader = items[0] if items else {"label": "N/A", "value": 0, "pct": 0.0}
         
         return {
+            "n": len(items),
             "items": items,
             "leader": leader,
             "measure_name": meas

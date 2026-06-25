@@ -19,8 +19,8 @@ class MockLLM:
             "Your only job is to rewrite the provided summary to sound slightly more natural. "
             "CRITICAL RULES: "
             "1. You must NEVER add, change, or invent any number, name, or fact. "
-            # "2. Keep the output extremely concise. "
-            # "3. Do not include introductory or conversational filler text."
+            "2. Keep the output extremely concise. "
+            "3. Do not include introductory or conversational filler text."
         )
 
         user_prompt = (

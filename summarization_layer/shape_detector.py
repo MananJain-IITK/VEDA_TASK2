@@ -16,6 +16,9 @@ def _has_one_dimension_and_one_measure(rows: list[dict]) -> bool:
            (not _is_number(vals[0]) and _is_number(vals[1]))
 
 def detect_shape(rows: list[dict], hints: dict) -> str:
+    # Priority 2: Infer from row structure
+    if not rows:
+        return 'EMPTY'
     # Priority 1: Trust planner hints
     intent = str(hints.get('intent', '')).lower()
     
@@ -26,9 +29,6 @@ def detect_shape(rows: list[dict], hints: dict) -> str:
     if intent == 'top_n': return 'TOP_N'
     if intent == 'single': return 'SINGLE_RECORD'
     
-    # Priority 2: Infer from row structure
-    if not rows:
-        return 'EMPTY'
     
     if len(rows) == 1 and len(rows[0]) == 1:
         if _is_number(_only_value(rows[0])):

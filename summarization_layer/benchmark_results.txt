@@ -1,0 +1,64 @@
+ Target: 20 runs per shape across 6 shapes.
+
+Benchmarking qwen2.5:0.5b
+  Total Runs         : 120
+  p50 Latency        : 0.76s
+  p95 Latency        : 1.61s
+  Within 3s Cap      : 100.0%
+  Validator Pass Rate: 26.7%
+
+Benchmarking llama3.2:1b
+  Total Runs         : 120
+  p50 Latency        : 1.37s
+  p95 Latency        : 4.17s
+  Within 3s Cap      : 70.0%
+  Validator Pass Rate: 3.3%
+
+Benchmarking qwen2.5:1.5b-instruct
+  Total Runs         : 120
+  p50 Latency        : 1.50s
+  p95 Latency        : 2.38s
+  Within 3s Cap      : 96.7%
+  Validator Pass Rate: 35.8%
+
+Benchmarking gemma2:2b
+  Total Runs         : 120
+  p50 Latency        : 2.87s
+  p95 Latency        : 4.28s
+  Within 3s Cap      : 51.7%
+  Validator Pass Rate: 33.3%
+
+Benchmarking smollm2:1.7b
+  Total Runs         : 120
+  p50 Latency        : 3.19s
+  p95 Latency        : 6.16s
+  Within 3s Cap      : 44.2%
+  Validator Pass Rate: 33.3%
+
+Benchmarking llama3.2:3b
+  Total Runs         : 120
+  p50 Latency        : 2.85s
+  p95 Latency        : 8.63s
+  Within 3s Cap      : 65.8%
+  Validator Pass Rate: 48.3%
+
+Benchmarking phi3:mini
+  Total Runs         : 120
+  p50 Latency        : 3.79s
+  p95 Latency        : 9.00s
+  Within 3s Cap      : 47.5%
+  Validator Pass Rate: 0.0%
+
+Benchmarking qwen2.5:3b
+  Total Runs         : 120
+  p50 Latency        : 2.73s
+  p95 Latency        : 4.42s
+  Within 3s Cap      : 60.8%
+  Validator Pass Rate: 67.5%
+
+Benchmarking mistral:7b
+  Total Runs         : 120
+  p50 Latency        : 7.45s
+  p95 Latency        : 11.11s
+  Within 3s Cap      : 24.2%
+  Validator Pass Rate: 16.7%
